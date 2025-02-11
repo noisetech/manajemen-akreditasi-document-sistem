@@ -44,9 +44,11 @@ Route::prefix('internal')
             Route::post('penelitian/simpan', [PenelitianController::class, 'simpan'])
                 ->name('penelitian.simpan');
             Route::get('penelitian/edit/{id}', [PenelitianController::class, 'edit'])
-            ->name('penelitian.edit');
+                ->name('penelitian.edit');
+            Route::put('penelitian/update/{id}', [PenelitianController::class, 'update'])
+                ->name('penelitian.update');
             Route::get('penelitian/hapus/{id}', [PenelitianController::class, 'hapus'])
-            ->name('penelitian.hapus');
+                ->name('penelitian.hapus');
 
             // permission
             Route::get('permission', [PermissionController::class, 'index'])

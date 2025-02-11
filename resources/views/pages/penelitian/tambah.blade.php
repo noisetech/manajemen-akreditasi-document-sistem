@@ -26,12 +26,28 @@
 <div class="page-heading">
     <h3>Penelitian</h3>
 </div>
+
+
+
 <div class="page-content">
+
+
+
+    <a href="{{ route('penelitian') }}" class="btn btn-sm btn-primary mb-2">
+        Kembali
+    </a>
+
     <div class="card shadow">
 
         <div class="card-body">
-            <form action="" method="post">
+            <form action="{{ route('penelitian.simpan') }}" method="post">
                 @csrf
+
+
+                <div class="form-group">
+                    <label for="">Judul:</label>
+                    <input type="text" name="judul" class="form-control" placeholder="Masukan judul">
+                </div>
 
                 <div class="form-group">
                     <label for="">Tanggal Penelitian:</label>
@@ -40,13 +56,13 @@
 
                 <div class="form-group">
                     <label for="">Penulis:</label>
-                    <input type="text" name="penulis" class="form-control" placeholder="Masukan penulis">
+                    <input type="text" id="input-tags" name="penulis" class="form-control" placeholder="Masukan penulis">
                 </div>
 
                 <div class="form-group">
                     <label for="">Keterangan:</label>
 
-                    <textarea class="form-control content-visi @error('content_misi') is-invalid @enderror" name="content_misi" placeholder="Masukkan Misi" rows="10">{!! old('content_misi') !!}</textarea>
+                    <textarea class="form-control content-visi @error('content_misi') is-invalid @enderror" name="keterangan" placeholder="Masukkan Misi" rows="10">{!! old('content_misi') !!}</textarea>
                     @error('content_misi')
                     <div class="invalid-feedback" style="display: block">
                         {{ $message }}

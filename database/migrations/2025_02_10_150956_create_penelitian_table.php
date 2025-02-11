@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('judul');
             $table->date('tanggal_penelitian');
-            $table->text('autor');
+            $table->text('penulis');
             $table->longText('keterangan');
             $table->softDeletes();
             $table->timestamps();

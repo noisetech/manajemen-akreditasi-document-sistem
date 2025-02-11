@@ -23,41 +23,38 @@ class PenelitianController extends Controller
 
     public function simpan(Request $request)
     {
-        $this->validate($request, [
-            'judul' => 'required',
-            'tanggal_penelitian' => 'required',
-            'autor' => 'required',
-            'keterngan' => 'required'
-        ]);
+
 
         $penelitian = new Penelitian();
         $penelitian->judul = $request->judul;
-        $penelitian->autor = $request->autor;
+        $penelitian->penulis = $request->penulis;
         $penelitian->tanggal_penelitian = $request->tanggal_penelitian;
         $penelitian->keterangan = $request->keterangan;
         $penelitian->save();
 
-        return redirect()->route('penelitin')->with('status', 'Data berhasil disimpan');
+        return redirect()->route('penelitian')->with('status', 'Data berhasil disimpan');
+    }
+
+
+    public function edit($id)
+    {
+        $penelitian = Penelitian::find($id);
+
+        return view('pages.penelitian.edit', [
+            'penelitian' => $penelitian
+        ]);
     }
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'judul' => 'required',
-            'tanggal_penelitian' => 'required',
-            'autor' => 'required',
-            'keterngan' => 'required'
-        ]);
-
-
         $penelitian = Penelitian::find($id);
         $penelitian->judul = $request->judul;
-        $penelitian->autor = $request->autor;
+        $penelitian->penulis = $request->penulis;
         $penelitian->tanggal_penelitian = $request->tanggal_penelitian;
         $penelitian->keterangan = $request->keterangan;
         $penelitian->save();
 
-        return redirect()->route('penelitin')->with('status', 'Data berhasil diubah');
+        return redirect()->route('penelitian')->with('status', 'Data berhasil diubah');
     }
 
 

@@ -15,7 +15,7 @@ class Penelitian extends Model
     protected $fillable = [
         'judul',
         'tanggal_penelitian',
-        'autor',
+        'penulis',
         'keterangan'
     ];
 }
