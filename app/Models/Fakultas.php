@@ -21,7 +21,14 @@ class Fakultas extends Model
     ];
 
 
-   public function user_fakultas(){
+    public function user_fakultas()
+    {
         return $this->hasMany(UserFakultas::class, 'fakultass_id', 'id');
-   }
+    }
+
+
+    public function arsip_akreditasi()
+    {
+        return $this->hasMany(ArsipAkredtasi::class, 'fakultas', 'id');
+    }
 }

@@ -51,8 +51,8 @@
                 </li>
 
                 <li class="sidebar-title">E-Arsip Akreditasi</li>
-                <li class="sidebar-item {{ setActive('internal/manajemen-akreditasi') }}">
-                    <a href="{{ route('manajemen-akreditasi') }}" class='sidebar-link'>
+                <li class="sidebar-item {{ setActive('internal/arsip-akreditasi') }}">
+                    <a href="{{ route('arsip_akreditasi') }}" class='sidebar-link'>
                         <i class="bi bi-house"></i>
                         <span>Manajemen Akreditasi</span>
                     </a>

@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\ArsipAkreditasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\KerjaSamaController;
-use App\Http\Controllers\ManajamenAkreditasiController;
 use App\Http\Controllers\PenelitianController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
@@ -34,6 +34,22 @@ Route::prefix('internal')
         Route::group(['middleware' => 'auth'], function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])
                 ->name('dashboard');
+
+            // arsip akreditasi
+            Route::get('arsip-akreditasi', [ArsipAkreditasiController::class, 'index'])
+                ->name('arsip_akreditasi');
+            Route::get('arsip-akreditasi/tambah', [ArsipAkreditasiController::class, 'tambah'])
+                ->name('arsip_akreditasi.tambah');
+            Route::post('arsip-akreditasi/simpan', [ArsipAkreditasiController::class, 'simpan'])
+                ->name('arsip-akreditasi.simpan');
+            Route::get('arsip-akreditasi/edit/{id}', [ArsipAkreditasiController::class, 'edit'])
+                ->name('arsip-akreditasi.edit');
+            Route::put('arsip-akreditas/update/{id}', [ArsipAkreditasiController::class, 'update'])
+                ->name('arsip-akreditasi.update');
+            Route::get('arsip-akreditasi/hapus/{id}', [ArsipAkreditasiController::class, 'hapus'])
+                ->name('arisp-akreditasi.hapus');
+            Route::get('arsip-akreditasi/preview/{id}', [ArsipAkreditasiController::class, 'preview_dokumen'])
+                ->name('arsip-akreditasi.preview');
 
 
             // penelitian
@@ -137,11 +153,6 @@ Route::prefix('internal')
             Route::get('kerja-sama/hapus/{id}', [KerjaSamaController::class, 'hapus'])
                 ->name('kerja-sama.hapus');
 
-
-
-            // manajemen akreditasi
-            Route::get('manajemen-akreditasi', [ManajamenAkreditasiController::class, 'index'])
-                ->name('manajemen-akreditasi');
         });
     });
 

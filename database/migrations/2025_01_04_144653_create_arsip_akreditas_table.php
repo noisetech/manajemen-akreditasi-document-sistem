@@ -14,15 +14,18 @@ return new class extends Migration
         Schema::create('arsip_akreditas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('fakultas_id');
-            $table->string('sumber_data');
-            $table->string('jenis');
-            $table->string('no_urutan');
-            $table->integer('bobot');
-            $table->text('deskripsi');
-            $table->integer('nilai')->nullable();
+            $table->string('sumber_data')->nullable();
+            $table->string('jenis')->nullable();
+            $table->string('no_urutan')->nullable();
+            $table->string('no_butir')->nullable();
+            $table->integer('bobot')->nullable();
+            $table->text('deskripsi')->nullable();
+            $table->longText('penilaian')->nullable();
+            $table->string('elemen_penilaian_lam')->nullable();
             $table->text('file_pendukung')->nullable();
-            $table->string('create_by');
-            $table->string('update_by');
+            $table->string('create_by')->nullable();
+            $table->string('update_by')->nullable();
+            $table->enum('peninjauan_auditor', ['approve', 'reject'])->nullable();
             $table->softDeletes();
             $table->timestamps();
 
