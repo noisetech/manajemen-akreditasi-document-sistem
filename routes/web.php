@@ -44,11 +44,11 @@ Route::prefix('internal')
                 ->name('arsip-akreditasi.simpan');
             Route::get('arsip-akreditasi/edit/{id}', [ArsipAkreditasiController::class, 'edit'])
                 ->name('arsip-akreditasi.edit');
-            Route::put('arsip-akreditas/update/{id}', [ArsipAkreditasiController::class, 'update'])
+            Route::put('arsip-akreditasi/update/{id}', [ArsipAkreditasiController::class, 'update'])
                 ->name('arsip-akreditasi.update');
             Route::get('arsip-akreditasi/hapus/{id}', [ArsipAkreditasiController::class, 'hapus'])
-                ->name('arisp-akreditasi.hapus');
-            Route::get('arsip-akreditasi/preview/{id}', [ArsipAkreditasiController::class, 'preview_dokumen'])
+                ->name('arsip-akreditasi.hapus');
+            Route::get('arsip-akreditasi/preview/{id}', [ArsipAkreditasiController::class, 'previewDokumen'])
                 ->name('arsip-akreditasi.preview');
 
 
@@ -152,7 +152,6 @@ Route::prefix('internal')
                 ->name('kerja-sama.simpan');
             Route::get('kerja-sama/hapus/{id}', [KerjaSamaController::class, 'hapus'])
                 ->name('kerja-sama.hapus');
-
         });
     });
 

@@ -41,17 +41,17 @@
                     <thead>
                         <tr>
 
-                            <th class="text-center">Visi</th>
-                            <th class="text-center">Misi</th>
-                            <th class="text-center">Aksi</th>
+                            <th class="text-start">Visi</th>
+                            <th class="text-start">Misi</th>
+                            <th class="text-start">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($visi_misi as $v )
                         <tr>
-                            <td>{!! $v->visi !!}</td>
-                            <td>{!! $v->misi !!}</td>
-                            <td>
+                            <td class="text-start">{!! $v->visi !!}</td>
+                            <td class="text-start">{!! $v->misi !!}</td>
+                            <td class="text-start">
                                 <a href="{{ route('visi_misi.hapus', $v->id) }}" class="btn btn-sm btn-danger">
                                     Hapus
                                 </a>
@@ -77,7 +77,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Permission</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
                 </div>
                 <div class="modal-body">
                     <form action="#" id="form-simpan" method="post">

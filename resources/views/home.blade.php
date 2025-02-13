@@ -178,15 +178,15 @@
                     <div class="col-lg-12 col-md-6">
                         <div class="about-inner-wrap">
                             <div class="section-title mb-0">
-                                <h6 class="sub-title">Visi | Misi Universitas Yarsi</h6>
+
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <ul class="single-list-wrap">
                                             <li class="single-list-inner style-check-box">
                                                 <i class="fa fa-check"></i> <strong>Visi</strong>
-
-                                                <p class="my-4" style="font-size: 14px !important;">“Mewujudkan perguruan Tinggi Islam yang terpandang, berwibawa, bermutu tinggi dan mampu bersaing dalam fora nasional maupun Internasional”</p>
                                             </li>
+
+                                            {!! $visi_misi->visi  !!}
 
 
                                         </ul>
@@ -196,23 +196,7 @@
                                             <li class="single-list-inner style-check-box">
                                                 <i class="fa fa-check"></i> <strong>Misi</strong>
                                             </li>
-                                            <ol start="1">
-                                                <li style="font-size: 14px !important;">
-                                                    <span style="font-size: 14px !important; text-align:left;"> Mengembangkan ilmu pengetahuan, teknologi, dan seni, melalui pendidikan, pengajaran dan pembelajaran yang unggul dan bermutu tinggi sesuai Islam.</span>
-                                                </li>
-
-                                                <li style="font-size: 14px !important;">
-                                                    <span style="font-size: 14px !important; text-align:left;"> Mengembangkan ilmu pengetahuan, teknologi dan seni, melalui pengkajian, penelitian dan publikasi yang unggul dan bermutu tinggi sesuai Islam.</span>
-                                                </li>
-
-                                                <li style="font-size: 14px !important;">
-                                                    <span style="font-size: 14px !important; text-align:left;"> Mengembangkan ilmu pengetahuan, teknologi, dan seni, yang dapat menjawab masalah dan tantangan masyarakat dunia yang unggul dan bermutu tinggi sesuai Islam.</span>
-                                                </li>
-
-                                                <li style="font-size: 14px !important;">
-                                                    <span style="font-size: 14px !important; text-align:left;"> Mengembangkan sumberdaya manusia dan tata kelola yang dapat menjawab persoalan yang timbul di masyarakat serta memberi arah perubahan dalam rangka membangun masyarakat dunia, khususnya masyarakat Indonesia yang adil, makmur, merata dan beradab sesuai Islam.</span>
-                                                </li>
-                                            </ol>
+                                            {!! $visi_misi->misi !!}
                                         </ul>
                                     </div>
                                 </div>

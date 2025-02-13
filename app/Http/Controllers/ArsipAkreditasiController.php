@@ -6,6 +6,8 @@ use App\Models\ArsipAkredtasi;
 use App\Models\Fakultas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class ArsipAkreditasiController extends Controller
 {
@@ -113,27 +115,18 @@ class ArsipAkreditasiController extends Controller
     }
 
 
-    public function preview_dokumen($id)
+    public function previewDokumen($id)
     {
-        $arsip = ArsipAkredtasi::findOrFail($id);
+        $arsipAkreditasi = ArsipAkredtasi::findOrFail($id);
 
-        // Path file PDF (sesuaikan dengan lokasi penyimpanan Anda)
-        $path = storage_path("app/public/pdf/{$arsip->file_pendukung}");
-
-        // Pastikan file tersedia
-        if (!file_exists($path)) {
-            abort(404, 'File tidak ditemukan');
+        if (!$arsipAkreditasi->file_pendukung ||!Storage::disk('public')->exists($arsipAkreditasi->file_pendukung)) {
+            abort(404, 'Document not found');
         }
 
-        // Return file dengan header yang mencegah IDM mengunduhnya
-        return response()->file($path, [
-            'Content-Type'        => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="' . basename($path) . '"',
-            'Cache-Control'       => 'no-store, no-cache, must-revalidate, max-age=0',
-            'Pragma'              => 'no-cache',
-            'Expires'             => '0',
-            'X-Content-Type-Options' => 'nosniff', // Mencegah MIME sniffing
-            'X-Accel-Buffering'   => 'no' // Mencegah buffering oleh proxy server
+        $path = storage_path('app/public/' . $arsipAkreditasi->file_pendukung);
+
+        return Response::make(file_get_contents($path), 200, [
+            'Content-Type' => 'application/pdf',
         ]);
     }
 }

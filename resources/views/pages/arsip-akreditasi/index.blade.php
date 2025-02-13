@@ -65,38 +65,43 @@
                     <thead>
                         <tr>
 
-                            <th>Fakultas</th>
-                            <th>Sumber Data</th>
-                            <th>No Urut</th>
-                            <th>No Butir</th>
-                            <th>Elemen Penilian LAM</th>
-                            <th>Deskriptor</th>
-                            <th>Dokumen Pendukung</th>
-                            <th>Aksi</th>
+                            <th class="text-start">Fakultas</th>
+                            <th class="text-start">Sumber Data</th>
+                            <th class="text-start">No Urut</th>
+                            <th class="text-start">No Butir</th>
+                            <th class="text-start">Elemen Penilian LAM</th>
+                            <th class="text-start">Deskriptor</th>
+                            <th class="text-center">Penilaian</th>
+                            <th class="text-start">Dokumen Pendukung</th>
+                            <th class="text-start">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ( $arsip_akreditasi as $a )
                         <tr>
-                            <td>{{ $a->fakultas->name }}</td>
-                            <td>{{ $a->sumber_data }}</td>
-                            <td>{{ $a->no_urutan }}</td>
-                            <td>{{ $a->no_butir }}</td>
-                            <td>{{ $a->elemen_penilaian_lam }}</td>
-                            <td>{!! $a->deskripsi !!}</td>
-                            <td>
-                                <a href="" target="_blank">
-                                    Preview Dokumen
-                                </a>
-                            </td>
-                            <td>
-                                <a href="{{ route('arsip-akreditasi.edit', $a->id) }}" class="btn btn-sm btn-warning text-white">
-                                    Edit
-                                </a>
+                            <td class="text-start">{{ $a->fakultas->name }}</td>
+                            <td class="text-start">{{ $a->sumber_data }}</td>
+                            <td class="text-start">{{ $a->no_urutan }}</td>
+                            <td class="text-start">{{ $a->no_butir }}</td>
+                            <td class="text-start">{{ $a->elemen_penilaian_lam }}</td>
+                            <td class="text-start">{!! $a->deskripsi !!}</td>
+                            <td class="text-start">{!! $a->penilaian !!}</td>
 
-                                <a href="{{ route('arisp-akreditasi.hapus', $a->id) }}" class="btn btn-sm btn-danger text-white">
-                                    Hapus
-                                </a>
+                            <td>
+                                <div class="d-flex justify-content-start">
+
+                                    <a class="badge bg-primary" href="{{ route('arsip-akreditasi.preview', $a->id) }}" target="_blank">
+                                        Preview Dokumen
+                                    </a>
+
+                                    <a href="{{ route('arsip-akreditasi.edit', $a->id) }}" class="btn mx-1 btn-sm btn-warning text-white">
+                                        Edit
+                                    </a>
+
+                                    <a href="{{ route('arsip-akreditasi.hapus', $a->id) }}" class="btn btn-sm btn-danger text-white">
+                                        Hapus
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                         @empty

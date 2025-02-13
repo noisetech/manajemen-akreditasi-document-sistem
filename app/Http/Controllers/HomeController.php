@@ -22,6 +22,9 @@ class HomeController extends Controller
     public function index()
     {
 
-        return view('home');
+        $visi_misi = VisiMisi::latest()->first();
+        return view('home', [
+            'visi_misi' => $visi_misi
+        ]);
     }
 }
