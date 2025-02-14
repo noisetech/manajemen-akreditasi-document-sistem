@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArsipAkreditasiController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\JurusanController;
@@ -48,7 +49,21 @@ Route::prefix('internal')
             Route::put('kategori_berita/update/{id}', [KategoriBeritaController::class, 'update'])
                 ->name('kategori_berita.update');
             Route::get('kategori_berita/hapus/{id}', [KategoriBeritaController::class, 'hapus'])
-                ->name('kategori_berita .hapus');
+                ->name('kategori_berita.hapus');
+
+            // berita
+            Route::get('berita', [BeritaController::class, 'index'])
+                ->name('berita');
+            Route::get('berita/tambah', [BeritaController::class, 'tambah'])
+                ->name('berita.tambah');
+            Route::post('berita/simpan', [BeritaController::class, 'simpan'])
+                ->name('berita.simpan');
+            Route::get('berita/edit/{id}', [BeritaController::class, 'edit'])
+                ->name('berita.edit');
+            Route::put('berita/update/{id}', [BeritaController::class, 'update'])
+                ->name('berita.update');
+            Route::get('berita/hapus/{id}', [BeritaController::class, 'hapus'])
+                ->name('berita.hapus');
 
             // arsip akreditasi
             Route::get('arsip-akreditasi', [ArsipAkreditasiController::class, 'index'])

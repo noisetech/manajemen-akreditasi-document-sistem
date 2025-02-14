@@ -71,6 +71,15 @@
 
 
 
+                <li class="sidebar-item {{ setActive('internal/berita') }}">
+                    <a href="{{ route('berita') }}" class='sidebar-link'>
+                        <i class="bi bi-tag"></i>
+                        <span>Berita</span>
+                    </a>
+                </li>
+
+
+
 
 
                 <li class="sidebar-title">Pengaturan</li>
