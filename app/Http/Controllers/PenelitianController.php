@@ -24,6 +24,12 @@ class PenelitianController extends Controller
     public function simpan(Request $request)
     {
 
+        $this->validate($request,[
+            'judul' => 'required',
+            'penulis' => 'required',
+            'tanggal_penelitian' => 'required',
+            'keterangan' => 'required'
+        ]);
 
         $penelitian = new Penelitian();
         $penelitian->judul = $request->judul;

@@ -60,6 +60,18 @@
                 </li>
 
 
+                <li class="sidebar-title">Berita</li>
+
+                <li class="sidebar-item {{ setActive('internal/kategori-berita') }}">
+                    <a href="{{ route('kategori_berita') }}" class='sidebar-link'>
+                        <i class="bi bi-tag"></i>
+                        <span>Kategori Berita</span>
+                    </a>
+                </li>
+
+
+
+
 
                 <li class="sidebar-title">Pengaturan</li>
 

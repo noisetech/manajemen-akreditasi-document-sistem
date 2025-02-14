@@ -40,7 +40,6 @@ class ArsipAkreditasiController extends Controller
 
     public function simpan(Request $request)
     {
-
         $this->validate($request, [
             'fakultas' => 'required',
             'sumber_data' => 'required',
@@ -51,6 +50,7 @@ class ArsipAkreditasiController extends Controller
             'deskripsi' => 'required',
             'elemen_penilaian_lam' => 'required',
             'file_pendukung' => 'nullable|file|mimes:pdf|max:2048',
+            'penilaian' => 'required',
         ], [
             'fakultas.required' => 'fakultas wajib diisi',
             'sumber_data.required' => 'sumber_data wajib diisi',
@@ -62,7 +62,8 @@ class ArsipAkreditasiController extends Controller
             'file_pendukung.file' => 'file_pendukung harus berupa file',
             'file_pendukung.mimes' => 'file_pendukung harus berupa file PDF',
             'file_pendukung.max' => 'file_pendukung maksimal 2 MB',
-            'deskripsi.required' => 'deskripsi wajib diisi'
+            'deskripsi.required' => 'deskripsi wajib diisi',
+            'penilaian.required' => 'penilaian wajib diisi'
         ]);
 
 
@@ -79,6 +80,22 @@ class ArsipAkreditasiController extends Controller
         $arsip_akreditasi->create_by = Auth::user()->name;
         $arsip_akreditasi->file_pendukung = $request->file('file_pendukung')->store('assets/file-pendukung-arsip-akreditasi', 'public');
         $arsip_akreditasi->save();
+
+        if ($request->hasFile('file_pendukung')) {
+            if ($arsip_akreditasi->file_pendukung && Storage::disk('public')->exists($arsip_akreditasi->file_pendukung)) {
+                Storage::disk('public')->delete($arsip_akreditasi->file_pendukung);
+            }
+
+            $file = $request->file('file_pendukung');
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $finalName = $fileName . '_' . time() . '.' . $extension;
+
+            $path = $file->storeAs('assets/file-pendukung-arsip-akreditasi', $finalName, 'public');
+            $arsip_akreditasi->file_pendukung = $path;
+            $arsip_akreditasi->save();
+        }
+
 
         return redirect()->route('arsip_akreditasi')->with('status', 'Data berhasil ditambah');
     }
@@ -106,17 +123,30 @@ class ArsipAkreditasiController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $this->validate($request, [
             'fakultas' => 'required',
             'sumber_data' => 'required',
             'jenis' => 'required',
             'no_urutan' => 'required',
+            'no_butir' => 'required',
             'bobot' => 'required',
             'deskripsi' => 'required',
-            'nilai' => 'required',
-            'file_pendukung' => 'required',
+            'elemen_penilaian_lam' => 'required',
+            'file_pendukung' => 'nullable|file|mimes:pdf|max:2048',
+        ], [
+            'fakultas.required' => 'fakultas wajib diisi',
+            'sumber_data.required' => 'sumber_data wajib diisi',
+            'jenis.required' => 'jenis wajib diisi',
+            'no_urutan.required' => 'no urutan wajib diisi',
+            'no_butir.required' => 'no butir wajib diisi',
+            'bobot.required' => 'bobot wajib diisi',
+            'elemen_penilaian_lam.required' => 'elemen peneliaian wajib diisi',
+            'file_pendukung.file' => 'file_pendukung harus berupa file',
+            'file_pendukung.mimes' => 'file_pendukung harus berupa file PDF',
+            'file_pendukung.max' => 'file_pendukung maksimal 2 MB',
+            'deskripsi.required' => 'deskripsi wajib diisi'
         ]);
-
 
         $arsip_akreditasi = ArsipAkredtasi::find($id);
         $arsip_akreditasi->fakultas_id = $request->fakultas;

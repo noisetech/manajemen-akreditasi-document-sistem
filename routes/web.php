@@ -4,6 +4,7 @@ use App\Http\Controllers\ArsipAkreditasiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FakultasController;
 use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\KategoriBeritaController;
 use App\Http\Controllers\KerjaSamaController;
 use App\Http\Controllers\PenelitianController;
 use App\Http\Controllers\PermissionController;
@@ -34,6 +35,20 @@ Route::prefix('internal')
         Route::group(['middleware' => 'auth'], function () {
             Route::get('/dashboard', [DashboardController::class, 'index'])
                 ->name('dashboard');
+
+            // kategori berita
+            Route::get('kategori-berita', [KategoriBeritaController::class, 'index'])
+                ->name('kategori_berita');
+            Route::get('kategori-berita/tambah', [KategoriBeritaController::class, 'tambah'])
+                ->name('kategori_berita.tambah');
+            Route::post('kategori-berita/simpan', [KategoriBeritaController::class, 'simpan'])
+                ->name('kategori_berita.simpan');
+            Route::get('kategori_berita/edit/{id}', [KategoriBeritaController::class, 'edit'])
+                ->name('kategori_berita.edit');
+            Route::put('kategori_berita/update/{id}', [KategoriBeritaController::class, 'update'])
+                ->name('kategori_berita.update');
+            Route::get('kategori_berita/hapus/{id}', [KategoriBeritaController::class, 'hapus'])
+                ->name('kategori_berita .hapus');
 
             // arsip akreditasi
             Route::get('arsip-akreditasi', [ArsipAkreditasiController::class, 'index'])

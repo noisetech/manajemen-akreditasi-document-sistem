@@ -56,7 +56,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Fakultas:</label>
-                            <select name="fakultas" class="form-control">
+                            <select name="fakultas" class="form-control  @error('fakultas') is-invalid @enderror">
                                 <option value="">--Pilih Fakultas--</option>
                                 @foreach ($fakultas as $f)
                                 <option value="{{ $f->id }}" {{ $arsip_akreditasi->fakultas_id == $f->id ? 'selected' : '' }}>
@@ -64,6 +64,9 @@
                                 </option>
                                 @endforeach
                             </select>
+                            @error('fakultas')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
