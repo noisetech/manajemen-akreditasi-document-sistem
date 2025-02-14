@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text('file_pendukung')->nullable();
             $table->string('create_by')->nullable();
             $table->string('update_by')->nullable();
-            $table->enum('peninjauan_auditor', ['approve', 'reject'])->nullable();
+            $table->enum('peninjauan_auditor', ['pending', 'approve', 'reject'])->nullable();
             $table->softDeletes();
             $table->timestamps();
 

@@ -50,6 +50,10 @@ Route::prefix('internal')
                 ->name('arsip-akreditasi.hapus');
             Route::get('arsip-akreditasi/preview/{id}', [ArsipAkreditasiController::class, 'previewDokumen'])
                 ->name('arsip-akreditasi.preview');
+            Route::get('arsip-akreditasi/detail/{id}', [ArsipAkreditasiController::class, 'detail'])
+                ->name('arsip-akreditasi.detail');
+            Route::get('arsip-akreditasi/change-status/{id}', [ArsipAkreditasiController::class, 'changeStatusArispAkreditasi'])
+                ->name('arsip-akreditasi.change-status');
 
 
             // penelitian

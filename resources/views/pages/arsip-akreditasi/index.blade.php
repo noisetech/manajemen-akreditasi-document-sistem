@@ -66,13 +66,8 @@
                         <tr>
 
                             <th class="text-start">Fakultas</th>
-                            <th class="text-start">Sumber Data</th>
-                            <th class="text-start">No Urut</th>
-                            <th class="text-start">No Butir</th>
-                            <th class="text-start">Elemen Penilian LAM</th>
-                            <th class="text-start">Deskriptor</th>
-                            <th class="text-center">Penilaian</th>
                             <th class="text-start">Dokumen Pendukung</th>
+                            <th class="text-start">Tanggal Dibuat</th>
                             <th class="text-start">Aksi</th>
                         </tr>
                     </thead>
@@ -80,25 +75,25 @@
                         @forelse ( $arsip_akreditasi as $a )
                         <tr>
                             <td class="text-start">{{ $a->fakultas->name }}</td>
-                            <td class="text-start">{{ $a->sumber_data }}</td>
-                            <td class="text-start">{{ $a->no_urutan }}</td>
-                            <td class="text-start">{{ $a->no_butir }}</td>
-                            <td class="text-start">{{ $a->elemen_penilaian_lam }}</td>
-                            <td class="text-start">{!! $a->deskripsi !!}</td>
-                            <td class="text-start">{!! $a->penilaian !!}</td>
+
+                            <td class="text-start">
+                                <a class="badge bg-primary text-white" href="{{ route('arsip-akreditasi.preview', $a->id) }}" target="_blank">
+                                    Preview Dokumen
+                                </a>
+                            </td>
+                            <td class="text-start">{{ \Carbon\Carbon::parse($a->created_at)->format('d-m-Y') }}</td>
 
                             <td>
                                 <div class="d-flex justify-content-start">
-
-                                    <a class="badge bg-primary" href="{{ route('arsip-akreditasi.preview', $a->id) }}" target="_blank">
-                                        Preview Dokumen
+                                    <a href="{{ route('arsip-akreditasi.detail', $a->id) }}" class="badge bg-secondary text-white">
+                                        Detail
                                     </a>
 
-                                    <a href="{{ route('arsip-akreditasi.edit', $a->id) }}" class="btn mx-1 btn-sm btn-warning text-white">
+                                    <a href="{{ route('arsip-akreditasi.edit', $a->id) }}" class="badge bg-warning mx-1 text-white">
                                         Edit
                                     </a>
 
-                                    <a href="{{ route('arsip-akreditasi.hapus', $a->id) }}" class="btn btn-sm btn-danger text-white">
+                                    <a href="{{ route('arsip-akreditasi.hapus', $a->id) }}" class="badge bg-danger text-white">
                                         Hapus
                                     </a>
                                 </div>
@@ -111,6 +106,10 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+
+            <div class="d-flex justify-content-center mt-3">
+                {{ $arsip_akreditasi->links() }}
             </div>
         </div>
     </div>
