@@ -106,6 +106,10 @@ class ArsipAkreditasiController extends Controller
 
         $file_pendukung = $request->file('file_pendukung');
 
+
+
+
+
         $arsip_akreditasi = ArsipAkredtasi::find($id);
         $arsip_akreditasi->fakultas_id = $request->fakultas;
         $arsip_akreditasi->sumber_data = $request->sumber_data;
@@ -114,9 +118,22 @@ class ArsipAkreditasiController extends Controller
         $arsip_akreditasi->bobot = $request->bobot;
         $arsip_akreditasi->deskripsi = $request->deskripsi;
         $arsip_akreditasi->nilai = $request->nilai;
-        $arsip_akreditasi->file_pendukung = $file_pendukung ?? ($request->hasFile('file_pendukung') ? $request->file('file_pendukung')->store('assets/file-pendukung-arsip-akreditasi', 'public') : '');
         $arsip_akreditasi->peninjauan_auditor = 'pending';
         $arsip_akreditasi->save();
+
+        if ($request->hasFile('file_pendukung')) {
+            if ($arsip_akreditasi->file_pendukung && Storage::disk('public')->exists($arsip_akreditasi->file_pendukung)) {
+                Storage::disk('public')->delete($arsip_akreditasi->file_pendukung);
+            }
+
+            $file = $request->file('file_pendukung');
+            $fileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = $file->getClientOriginalExtension();
+            $finalName = $fileName . '_' . time() . '.' . $extension;
+
+            $path = $file->storeAs('assets/file-pendukung-arsip-akreditasi', $finalName, 'public');
+            $arsip_akreditasi->file_pendukung = $path;
+        }
 
         return redirect()->route('arsip_akreditasi')->with('status', 'Data berhasil ditambah');
     }
@@ -132,7 +149,29 @@ class ArsipAkreditasiController extends Controller
     }
 
 
-    public function previewDokumen($id)
+    public function previewDokumen($filename)
+    {
+        $arsipAkreditasi = ArsipAkredtasi::where('file_pendukung', 'LIKE', '%' . $filename)->firstOrFail();
+
+        if (!$arsipAkreditasi->file_pendukung || !Storage::disk('public')->exists($arsipAkreditasi->file_pendukung)) {
+            abort(404, 'Document not found');
+        }
+
+        $path = storage_path('app/public/' . $arsipAkreditasi->file_pendukung);
+        $originalName = basename($arsipAkreditasi->file_pendukung);
+
+        return Response::make(file_get_contents($path), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . $originalName . '"',
+            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+            'Pragma' => 'no-cache',
+            'X-Content-Type-Options' => 'nosniff',
+            'X-Frame-Options' => 'SAMEORIGIN'
+        ]);
+    }
+
+
+    public function changeStatusArispAkreditasi(Request $request, $id)
     {
         $arsipAkreditasi = ArsipAkredtasi::findOrFail($id);
 
@@ -141,24 +180,11 @@ class ArsipAkreditasiController extends Controller
         }
 
         $path = storage_path('app/public/' . $arsipAkreditasi->file_pendukung);
+        $originalName = basename($arsipAkreditasi->file_pendukung);
 
         return Response::make(file_get_contents($path), 200, [
             'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="' . $originalName . '"'
         ]);
-    }
-
-
-    public function changeStatusArispAkreditasi(Request $request, $id)
-    {
-        $arsip_akreditasi = ArsipAkredtasi::findOrFail($id);
-        $status = $request->query('status');
-
-        if ($arsip_akreditasi->peninjauan_auditor == 'pending') {
-            if ($status == 'approve' || $status == 'reject') {
-                $arsip_akreditasi->peninjauan_auditor = $status;
-                $arsip_akreditasi->save();
-                return redirect()->back()->with('status', 'Status berhasil diubah menjadi ' . ucfirst($status));
-            }
-        }
     }
 }

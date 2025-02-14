@@ -77,7 +77,7 @@
                             <td class="text-start">{{ $a->fakultas->name }}</td>
 
                             <td class="text-start">
-                                <a class="badge bg-primary text-white" href="{{ route('arsip-akreditasi.preview', $a->id) }}" target="_blank">
+                                <a class="badge bg-primary text-white" href="{{ route('arsip-akreditasi.preview', basename($a->file_pendukung)) }}" target="_blank">
                                     Preview Dokumen
                                 </a>
                             </td>
