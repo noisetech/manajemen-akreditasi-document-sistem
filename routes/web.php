@@ -125,16 +125,16 @@ Route::prefix('internal')
             // fakultas
             Route::get('fakultas', [FakultasController::class, 'index'])
                 ->name('fakultas');
-            Route::get('fakultas/data', [FakultasController::class, 'data'])
-                ->name('fakultas.data');
-            Route::get('fakultas/getDataById/{id}', [FakultasController::class, 'getDataById'])
-                ->name('fakultas.getDataById');
+            Route::get('fakultas/tambah', [FakultasController::class, 'tambah'])
+                ->name('fakultas.tambah');
             Route::post('fakultas/simpan', [FakultasController::class, 'simpan'])
-                ->name('fakultas/simpan');
-            Route::post('fakultas/hapus', [FakultasController::class, 'hapus'])
-                ->name('fakultas/hapus');
-            Route::post('fakultas/update', [FakultasController::class, 'update'])
-                ->name('fakultas/update');
+                ->name('fakultas.simpan');
+            Route::get('fakultas/edit/{id}', [FakultasController::class, 'edit'])
+                ->name('fakultas.edit');
+            Route::get('fakultas/hapus/{id}', [FakultasController::class, 'hapus'])
+                ->name('fakultas.hapus');
+            Route::put('fakultas/update/{id}', [FakultasController::class, 'update'])
+                ->name('fakultas.update');
 
 
             Route::get('visi-misi', [VisiMisiController::class, 'index'])
