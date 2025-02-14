@@ -56,19 +56,25 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Fakultas:</label>
-                            <select name="fakultas" class="form-control">
+                            <select name="fakultas" class="form-control @error('fakultas') is-invalid @enderror">
                                 <option value="">--Pilih Fakultas--</option>
                                 @foreach ($fakultas as $f )
                                 <option value="{{ $f->id }}">{{ $f->name }}</option>
                                 @endforeach
                             </select>
+                            @error('fakultas')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Sumber Data:</label>
-                            <input type="text" name="sumber_data" class="form-control">
+                            <input type="text" name="sumber_data" class="form-control  @error('sumber_data') is-invalid @enderror">
+                            @error('sumber_data')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -78,21 +84,32 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="">Jenis:</label>
-                            <input type="text" name="jenis" class="form-control">
+                            <input type="text" name="jenis" class="form-control  @error('jenis') is-invalid @enderror">
+                            @error('jenis')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="">No Urutan:</label>
-                            <input type="text" name="no_urutan" class="form-control">
+                            <input type="text" name="no_urutan" class="form-control  @error('no_urutan') is-invalid @enderror">
+                            @error('no_urutan')
+                            <div class=" text-danger">{{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="">No Butir:</label>
-                            <input type="text" name="no_butir" class="form-control">
+                            <input type="text" name="no_butir" class="form-control  @error('no_butir') is-invalid @enderror">
+                            @error('no_butir')
+                            <div class=" text-danger">{{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -101,31 +118,51 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Bobot:</label>
-                            <input type="text" name="bobot" class="form-control">
+                            <input type="text" name="bobot" class="form-control @error('bobot') is-invalid @enderror">
+                            @error('bobot')
+                            <div class=" text-danger">{{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Elemen LAM:</label>
-                            <input type="text" name="elemen_penilaian_lam" class="form-control">
+                            <input type="text" name="elemen_penilaian_lam" class="form-control  @error('elemen_penilaian_lam') is-invalid @enderror">
+                            @error('elemen_penilaian_lam')
+                            <div class=" text-danger">{{ $message }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="">Deskriptior:</label>
-                    <textarea name="deskripsi" class="form-control deskriptor"></textarea>
+                    <textarea name="deskripsi" class="form-control deskriptor  @error('deskripsi') is-invalid @enderror"></textarea>
+                    @error('deskripsi')
+                    <div class=" text-danger">{{ $message }}
+                    </div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="">Penilaian:</label>
-                    <textarea name="penilaian" id="" class="form-control nilai"></textarea>
+                    <textarea name="penilaian" id="" class="form-control nilai   @error('penilaian') is-invalid @enderror"></textarea>
+                    @error('penilaian')
+                    <div class=" text-danger">{{ $message }}
+                    </div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="">File Pendukung:</label>
-                    <input type="file" name="file_pendukung" class="form-control" id="file_pendukung" accept="application/pdf">
+                    <input type="file" name="file_pendukung" class="form-control  @error('file_pendukung') is-invalid @enderror" id="file_pendukung" accept="application/pdf">
+                    @error('file_pendukung')
+                    <div class=" text-danger">{{ $message }}
+                    </div>
+                    @enderror
                 </div>
                 <div id="pdf-preview" class="mt-3" style="display: none;">
                     <iframe id="pdf-viewer" style="width: 100%; height: 500px;" frameborder="0"></iframe>

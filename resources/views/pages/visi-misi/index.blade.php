@@ -31,7 +31,7 @@
         <div class="card-header">
             <div class="d-flex justify-content-end">
                 <a href="{{ route('visi_misi.tambah') }}" class="badge bg-primary tambah text-white">
-                    Tambah Permission
+                    Tambah
                 </a>
             </div>
         </div>
@@ -72,70 +72,8 @@
 
 
 
-    <!-- Modal Tambah-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah</h5>
-                </div>
-                <div class="modal-body">
-                    <form action="#" id="form-simpan" method="post">
-                        @csrf
-
-                        <div class="form-group">
-                            <label for="">Permission:</label>
-                            <input type="text" name="permission" class="form-control">
-                            <span id="permission_error" class="text-danger error-text my-2 text-sm">
-
-                            </span>
-
-                        </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-secondary" id="tutupTambah">Tutup</button>
-                    <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Akhir Modal Tambah -->
 
 
-    <!-- Modal Edit -->
-    <div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Permission</h5>
-                </div>
-                <div class="modal-body">
-                    <form action="#" id="form-update" method="post">
-                        @csrf
-
-                        <input type="text" name="id" class="form-control" hidden id="id_permission">
-
-                        <div class="form-group">
-                            <label for="">Permission:</label>
-                            <input type="text" name="permission" class="form-control" id="permission">
-                            <span id="permission_error" class="text-danger error-text my-2 text-sm">
-
-                            </span>
-
-                        </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-secondary" id="tutupEdit">Tutup</button>
-                    <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
-                </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Akhir Modal Edit -->
 
 </div>
 

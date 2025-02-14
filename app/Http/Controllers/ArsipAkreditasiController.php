@@ -50,6 +50,19 @@ class ArsipAkreditasiController extends Controller
             'bobot' => 'required',
             'deskripsi' => 'required',
             'elemen_penilaian_lam' => 'required',
+            'file_pendukung' => 'nullable|file|mimes:pdf|max:2048',
+        ], [
+            'fakultas.required' => 'fakultas wajib diisi',
+            'sumber_data.required' => 'sumber_data wajib diisi',
+            'jenis.required' => 'jenis wajib diisi',
+            'no_urutan.required' => 'no urutan wajib diisi',
+            'no_butir.required' => 'no butir wajib diisi',
+            'bobot.required' => 'bobot wajib diisi',
+            'elemen_penilaian_lam.required' => 'elemen peneliaian wajib diisi',
+            'file_pendukung.file' => 'file_pendukung harus berupa file',
+            'file_pendukung.mimes' => 'file_pendukung harus berupa file PDF',
+            'file_pendukung.max' => 'file_pendukung maksimal 2 MB',
+            'deskripsi.required' => 'deskripsi wajib diisi'
         ]);
 
 
@@ -103,7 +116,6 @@ class ArsipAkreditasiController extends Controller
             'nilai' => 'required',
             'file_pendukung' => 'required',
         ]);
-
 
 
         $arsip_akreditasi = ArsipAkredtasi::find($id);

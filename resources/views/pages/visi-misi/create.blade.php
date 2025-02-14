@@ -27,14 +27,15 @@
     <h3>Visi Misi</h3>
 </div>
 <div class="page-content">
+
+
+
+    <a href="{{ route('visi_misi') }}" class="btn btn-sm btn-primary mb-3">
+        Kembali
+    </a>
+
     <div class="card shadow">
-        <div class="card-header">
-            <div class="d-flex justify-content-end">
-                <a href="#" class="badge bg-primary tambah text-white">
-                    Tambah Permission
-                </a>
-            </div>
-        </div>
+
         <div class="card-body">
             <form action="{{ route('visi_misi.simpan') }}" method="post">
                 @csrf
