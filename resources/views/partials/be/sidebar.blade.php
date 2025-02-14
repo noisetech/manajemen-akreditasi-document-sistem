@@ -73,16 +73,13 @@
 
                 <li class="sidebar-item {{ setActive('internal/berita') }}">
                     <a href="{{ route('berita') }}" class='sidebar-link'>
-                        <i class="bi bi-tag"></i>
+                        <i class="bi bi-globe"></i>
                         <span>Berita</span>
                     </a>
                 </li>
 
 
-
-
-
-                <li class="sidebar-title">Pengaturan</li>
+                <li class="sidebar-title">Company Profile</li>
 
                 <li class="sidebar-item {{ setActive('internal/visi-misi') }}">
                     <a href="{{ route('visi_misi') }}" class='sidebar-link'>
@@ -113,6 +110,9 @@
                         <span>Permission</span>
                     </a>
                 </li>
+
+                <li class="sidebar-title">Pengaturan</li>
+
 
                 <li class="sidebar-item {{ setActive('internal/role') }}">
                     <a href="{{ route('role') }}" class='sidebar-link'>
