@@ -100,15 +100,6 @@
                     </tr>
 
                     <tr>
-                        <th>Dokumen pendukung:</th>
-                        <td>
-                            <a class="badge bg-primary text-white" href="{{ route('arsip-akreditasi.preview', $arsip_akreditasi->id) }}" target="_blank">
-                                Preview Dokumen
-                            </a>
-                        </td>
-                    </tr>
-
-                    <tr>
                         <th>Peninjauan Auditor</th>
                         <td>
                             @if ($arsip_akreditasi->peninjauan_auditor == 'pending')
@@ -126,6 +117,21 @@
                             @endif
                         </td>
                     </tr>
+
+                    <tr>
+                        <th colspan="2">Dokumen pendukung:</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div id="pdf-preview" class="mt-3" style="{{ $arsip_akreditasi->file_pendukung ? '' : 'display: none;' }}">
+                                <iframe id="pdf-viewer" style="width: 100%; height: 500px;" frameborder="0"
+                                    src="{{ $arsip_akreditasi->file_pendukung ? asset('storage/'.$arsip_akreditasi->file_pendukung) : '' }}">
+                                </iframe>
+                            </div>
+                        </td>
+                    </tr>
+
+
                 </table>
             </div>
         </div>
@@ -133,3 +139,19 @@
 </div>
 
 @endsection
+
+@push('script')
+<script>
+    document.getElementById('file_pendukung').addEventListener('change', function(event) {
+        let file = event.target.files[0];
+
+        if (file && file.type === "application/pdf") {
+            let fileURL = URL.createObjectURL(file);
+            document.getElementById('pdf-viewer').src = fileURL;
+            document.getElementById('pdf-preview').style.display = 'block';
+        } else {
+            document.getElementById('pdf-preview').style.display = 'none';
+        }
+    });
+</script>
+@endpush

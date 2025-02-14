@@ -104,10 +104,6 @@ class ArsipAkreditasiController extends Controller
             'file_pendukung' => 'required',
         ]);
 
-        $file_pendukung = $request->file('file_pendukung');
-
-
-
 
 
         $arsip_akreditasi = ArsipAkredtasi::find($id);
@@ -133,6 +129,7 @@ class ArsipAkreditasiController extends Controller
 
             $path = $file->storeAs('assets/file-pendukung-arsip-akreditasi', $finalName, 'public');
             $arsip_akreditasi->file_pendukung = $path;
+            $arsip_akreditasi->save();
         }
 
         return redirect()->route('arsip_akreditasi')->with('status', 'Data berhasil ditambah');
@@ -159,14 +156,20 @@ class ArsipAkreditasiController extends Controller
 
         $path = storage_path('app/public/' . $arsipAkreditasi->file_pendukung);
         $originalName = basename($arsipAkreditasi->file_pendukung);
+        $content = file_get_contents($path);
 
-        return Response::make(file_get_contents($path), 200, [
+        return Response::make($content, 200, [
             'Content-Type' => 'application/pdf',
             'Content-Disposition' => 'inline; filename="' . $originalName . '"',
-            'Cache-Control' => 'no-store, no-cache, must-revalidate, max-age=0',
+            'Content-Length' => strlen($content),
+            'Cache-Control' => 'private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
             'Pragma' => 'no-cache',
+            'Expires' => '0',
+            'Accept-Ranges' => 'none',
             'X-Content-Type-Options' => 'nosniff',
-            'X-Frame-Options' => 'SAMEORIGIN'
+            'X-Frame-Options' => 'SAMEORIGIN',
+            'Content-Security-Policy' => "default-src 'self'; object-src 'self'",
+            'X-Download-Options' => 'noopen'
         ]);
     }
 

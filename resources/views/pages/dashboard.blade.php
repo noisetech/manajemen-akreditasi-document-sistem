@@ -16,7 +16,7 @@
     <section class="row">
         <div class="col-12 col-lg-12">
             <div class="row">
-                <div class="col-6 col-lg-3 col-md-6">
+                <div class="col-12 col-lg-12 col-md-12">
                     <div class="card">
                         <div class="card-body py-4 px-5">
                             <div class="d-flex align-items-center">
@@ -34,6 +34,16 @@
             </div>
         </div>
     </section>
+
+
+    <div class="card shadow">
+        <div class="card-body">
+            <h6>Selamat Datang di Sistem Informasi Akreditas Fakultas Universitas Yarsi Indonesia</h6>
+            <p>
+                Sistem Informasi Akreditas Fakultas Universitas Yarsi Indonesia merupakan sebuah sistem informasi yang digunakan untuk mengelola data-data akreditas fakultas Universitas Yarsi Indonesia.
+            </p>
+        </div>
+    </div>
 </div>
 
 @endsection
