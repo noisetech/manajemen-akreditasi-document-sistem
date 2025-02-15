@@ -39,19 +39,15 @@
             <form action="{{ route('kerja-sama.simpan') }}" enctype="multipart/form-data" method="post">
                 @csrf
 
+
                 <div class="form-group">
-                    <label for="">Thumbnail:</label>
-                    <input type="file" class="form-control" name="thumbnail">
+                    <label for="">Tangal Post:</label>
+                    <input type="date" class="form-control" name="tanggal_post">
                 </div>
 
 
                 <div class="form-group">
-                    <label for="">Tanggal Kerja Sama:</label>
-                    <input type="date" class="form-control" name="tanggal_kerja_sama">
-                </div>
-
-                <div class="form-group">
-                    <label>Visi:</label>
+                    <label>Keterangan:</label>
                     <textarea class="form-control content-visi @error('content_keterangan') is-invalid @enderror" name="content_keterangan" rows="10">{!! old('content_keterangan') !!}</textarea>
                     @error('content_keterangan')
                     <div class="invalid-feedback" style="display: block">

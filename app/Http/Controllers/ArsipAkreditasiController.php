@@ -31,7 +31,7 @@ class ArsipAkreditasiController extends Controller
 
     public function tambah()
     {
-        $fakultas = Fakultas::all();
+        $fakultas = Fakultas::whereIn('status_aktif', ['aktif'])->orderBy('name', 'asc')->get();
 
         return view('pages.arsip-akreditasi.tambah', [
             'fakultas' => $fakultas
@@ -158,6 +158,7 @@ class ArsipAkreditasiController extends Controller
         $arsip_akreditasi->nilai = $request->nilai;
         $arsip_akreditasi->peninjauan_auditor = 'pending';
         $arsip_akreditasi->save();
+
 
         if ($request->hasFile('file_pendukung')) {
             if ($arsip_akreditasi->file_pendukung && Storage::disk('public')->exists($arsip_akreditasi->file_pendukung)) {

@@ -16,6 +16,7 @@ class Penelitian extends Model
         'judul',
         'tanggal_penelitian',
         'penulis',
-        'keterangan'
+        'keterangan',
+        'cover'
     ];
 }

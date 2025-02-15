@@ -17,7 +17,8 @@ class Fakultas extends Model
         'status_aktif',
         'create_by',
         'upadate_by',
-        'slug'
+        'slug',
+        'status_aktif'
     ];
 
 

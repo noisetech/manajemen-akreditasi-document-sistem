@@ -184,6 +184,12 @@ Route::prefix('internal')
                 ->name('kerja_sama.tambah');
             Route::post('kerja-sama/simpan', [KerjaSamaController::class, 'simpan'])
                 ->name('kerja-sama.simpan');
+            Route::get('kerja-sama/edit/{id}', [KerjaSamaController::class, 'edit'])
+                ->name('kerja_sama.edit');
+            Route::get('kerja-sama/detail/{id}', [KerjaSamaController::class, 'detail'])
+                ->name('kerja-sama.detail');
+            Route::put('kerja-sama/update/{id}', [KerjaSamaController::class, 'update'])
+                ->name('kerja-sama.update');
             Route::get('kerja-sama/hapus/{id}', [KerjaSamaController::class, 'hapus'])
                 ->name('kerja-sama.hapus');
         });

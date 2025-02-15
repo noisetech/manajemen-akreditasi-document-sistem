@@ -73,11 +73,18 @@
                         @forelse ($berita as $f)
                         <tr>
                             <td class="text-start">{{ $f->kategori_berita->kategori }}</td>
+                            <td class="text-start">{{ $f->judul }}</td>
+                            <td class="text-start">
+                                <img src="{{ Storage::url($f->tumbnail)  }}" alt="" class="img-thumbnail" width="150">
+                            </td>
+                            <td class="text-start">
+                                {!! $f->content !!}
+                            </td>
 
                             <td>
                                 <div class="d-flex justify-content-start">
 
-                                    <a href="{{ route('kategori_berita.edit', $f->id) }}" class="badge mx-1 bg-warning tambah text-white">
+                                    <a href="{{ route('berita.edit', $f->id) }}" class="badge mx-1 bg-warning tambah text-white">
                                         Edit
                                     </a>
 

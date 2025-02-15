@@ -42,6 +42,11 @@
     </div>
 </div>
 <div class="page-content">
+
+
+    <a href="{{ route('fakultas') }}" class="btn btn-sm btn-primary mb-3">
+        Kembali
+    </a>
     <div class="card shadow">
 
         <div class="card-body">
@@ -50,7 +55,10 @@
 
                 <div class="form-group">
                     <label for="">Fakultas:</label>
-                    <input type="text" name="fakultas" class="form-control" >
+                    <input type="text" name="fakultas" class="form-control @error('fakultas') is-invalid @enderror">
+                    @error('fakultas')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <button class="btn btn-sm btn-primary" type="submit">
@@ -67,4 +75,3 @@
 
 
 @endsection
-

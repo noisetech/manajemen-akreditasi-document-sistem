@@ -13,13 +13,19 @@ return new class extends Migration
     {
         Schema::create('berita', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kategori_berita_id')->constrained('kategori_berita')->onDelete('cascade');
-            $table->string('judul');
+            $table->foreignId('kategori_berita_id');
             $table->string('slug')->unique();
+            $table->string('judul');
             $table->longText('content');
-            $table->text('tumbnail');
+            $table->text('tumbnail')->nullable();
+            $table->string('penulis');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('kategori_berita_id')->references('id')
+                ->on('kategori_berita')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

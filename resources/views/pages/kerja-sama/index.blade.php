@@ -41,31 +41,38 @@
                     <thead>
                         <tr>
 
-                            <th class="text-center">Thumbnail</th>
-                            <th class="text-center">Tanggal Post</th>
-                            <th class="text-center">Tanggal Kerja Sama</th>
-                            <th class="text-center">Keteragan</th>
 
-                            <th class="text-center">Aksi</th>
+                            <th class="text-start">Tanggal Post</th>
+                            <th class="text-start">Keteragan</th>
+
+                            <th class="text-start">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($kerja_sama as $v )
                         <tr>
-                            <td>
-                                <img src="{{ Storage::url($v->thumbnail) }}" alt="" class="img-thumbnail" width="100" >
-                            </td>
-                            <td>
+
+                            <td class="text-start">
                                 {{ \Carbon\Carbon::parse($v->tanggal_post)->format('d-m-Y') }}
                             </td>
-                            <td>
-                                {{ \Carbon\Carbon::parse($v->tanggal_kerja_sama)->format('d-m-Y') }}
-                            </td>
-                            <td>
+
+                            <td class="text-start">
                                 {!! $v->keterangan !!}
                             </td>
                             <td>
-                                <a href="" class="btn btn-sm btn-danger">Hapus</a>
+                                <div class="d-flex justify-content-start">
+                                    <a href="{{ route('kerja-sama.detail', $v->id) }}" class="badge bg-secondary text-white">
+                                        Detail
+                                    </a>
+
+                                    <a href="{{ route('kerja_sama.edit', $v->id) }}" class="badge bg-warning mx-1 text-white">
+                                        Edit
+                                    </a>
+
+                                    <a href="" class="badge bg-danger text-white">
+                                        Hapus
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                         @empty

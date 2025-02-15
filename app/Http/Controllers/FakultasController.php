@@ -30,7 +30,10 @@ class FakultasController extends Controller
     {
         $this->validate($request, [
             'fakultas' => 'required'
+        ], [
+            'fakultas.required' => 'fakultas tidak boleh kosong'
         ]);
+
 
         $fakultas = new Fakultas();
         $fakultas->name = $request->fakultas;
@@ -55,6 +58,8 @@ class FakultasController extends Controller
     {
         $this->validate($request, [
             'fakultas' => 'required'
+        ], [
+            'fakultas.required' => 'fakultas tidak boleh kosong'
         ]);
 
         $fakultas = Fakultas::findOrFail($id);
@@ -62,13 +67,15 @@ class FakultasController extends Controller
         $fakultas->status_aktif = 'aktif';
         $fakultas->create_by = Auth::user()->name;
         $fakultas->slug = Str::slug($request->nama);
+        $fakultas->status_aktif  = $request->status_aktif;
         $fakultas->save();
 
         return redirect()->route('fakultas')->with('status', 'Data fakultas diubah');
     }
 
 
-    public function hapus($id){
+    public function hapus($id)
+    {
         $fakultas = Fakultas::findOrFail($id);
 
         $fakultas->delete();

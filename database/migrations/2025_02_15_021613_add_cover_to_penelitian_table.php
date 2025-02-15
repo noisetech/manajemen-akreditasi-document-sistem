@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kerjasama', function (Blueprint $table) {
-            $table->id();
-            $table->longText('keterangan');
-            $table->string('create_by');
-            $table->string('update_by');
-            $table->softDeletes();
-            $table->timestamps();
+        Schema::table('penelitian', function (Blueprint $table) {
+            $table->text('cover')->nullable();
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kerjasama');
+        Schema::table('penelitian', function (Blueprint $table) {
+            $table->dropColumn('cover');
+        });
     }
 };

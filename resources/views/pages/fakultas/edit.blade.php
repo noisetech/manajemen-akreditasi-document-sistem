@@ -42,6 +42,10 @@
     </div>
 </div>
 <div class="page-content">
+
+    <a href="{{ route('fakultas') }}" class="btn btn-sm btn-primary mb-3">
+        Kembali
+    </a>
     <div class="card shadow">
 
         <div class="card-body">
@@ -52,6 +56,15 @@
                 <div class="form-group">
                     <label for="">Fakultas:</label>
                     <input type="text" name="fakultas" class="form-control" value="{{ $fakultas->name }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="">Status:</label>
+                    <select name="status_aktif" class="form-control">
+                        <option value="">--Pilih--</option>
+                        <option value="aktif" {{ $fakultas->status_aktif == 'aktif' ? 'selected' : '' }}>Aktif</option>
+                        <option value="tidak aktif" {{ $fakultas->status_aktif == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                    </select>
                 </div>
 
                 <button class="btn btn-sm btn-primary" type="submit">
@@ -68,4 +81,3 @@
 
 
 @endsection
-

@@ -13,11 +13,15 @@ class KerjaSama extends Model
     protected $table = 'kerjasama';
 
     protected $fillable = [
-        'tanggal_kerja_sama',
         'keterangan',
         'thumbnail',
         'tanggal_post',
         'create_by',
         'update_by'
     ];
+
+    public function patner_kerja_sama()
+    {
+        return $this->hasMany(PatnerKerjaSama::class, 'kerjasama_id', 'id');
+    }
 }

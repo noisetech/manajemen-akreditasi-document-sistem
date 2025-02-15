@@ -31,26 +31,28 @@ class BeritaController extends Controller
 
     public function simpan(Request $request)
     {
+
+        // dd($request->all());
+
         $this->validate($request, [
             'judul' => 'required',
             'content' => 'required',
             'kategori' => 'required',
             'thumbnail' => 'required|file|max:2048|mimes:jpg,jpeg,png',
-            'tanggal_post' => 'required'
         ], [
             'judul.required' => 'Judul harus diisi',
             'content.required' => 'Content harus di isi',
             'kategori.required' => 'Kategori harus di isi',
             'thumbnail.required' => 'thumnail harus di isi',
             'thumbnail.file' => 'thumnail harus berupa file',
-            'tanggal_post.required' => 'Tanggal post harus di isi'
         ]);
 
         $berita = new Berita();
         $berita->judul = $request->judul;
-        $berita->slug = Str::slug($request->berita);
+        $berita->slug = Str::slug($request->judul);
         $berita->penulis = Auth::user()->name;
         $berita->content = $request->content;
+        $berita->kategori_berita_id = $request->kategori;
         $berita->save();
 
         if ($request->hasFile('thumbnail')) {
@@ -63,19 +65,22 @@ class BeritaController extends Controller
             $extension = $file->getClientOriginalExtension();
             $finalName = $fileName . '_' . time() . '.' . $extension;
             $path = $file->storeAs('assets/thumbnail-berita', $finalName, 'public');
-            $berita->thumbnail = $path;
+            $berita->tumbnail = $path;
             $berita->save();
         }
 
-        return redirect()->route('berita.index')->with('status', 'Data berhasil disimpan');
+        return redirect()->route('berita')->with('status', 'Data berhasil disimpan');
     }
 
     public function edit($id)
     {
         $berita = Berita::find($id);
 
+        $kategori_berita = KategoriBerita::all();
+
         return view('pages.berita.edit', [
-            'berita' => $berita
+            'berita' => $berita,
+            'kategori_berita' => $kategori_berita
         ]);
     }
 
@@ -108,7 +113,6 @@ class BeritaController extends Controller
             $path = $file->storeAs('assets/thumbnail-berita', $finalName, 'public');
             $berita->thumbnail = $path;
             $berita->save();
-            return redirect()->route('berita.index')->with('status', 'Data berhasil diupdate');
         }
 
         return redirect()->route('berita.index')->with('status', 'Data berhasil diupdate');

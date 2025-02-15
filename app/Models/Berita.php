@@ -18,6 +18,7 @@ class Berita extends Model
         'slug',
         'content',
         'tumbnail',
+        'penulis'
     ];
 
     public function kategori_berita(){

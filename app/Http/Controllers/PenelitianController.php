@@ -24,11 +24,16 @@ class PenelitianController extends Controller
     public function simpan(Request $request)
     {
 
-        $this->validate($request,[
+        $this->validate($request, [
             'judul' => 'required',
             'penulis' => 'required',
             'tanggal_penelitian' => 'required',
-            'keterangan' => 'required'
+            'keterangan' => 'required',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
+        ], [
+            'judul.required' => 'judul tidak boleh kosong',
+            'penulis.required' => 'penulis tidak boleh kosong',
+            'tanggal_penelitian.required' => 'tanggal penelitian tidak boleh kosong'
         ]);
 
         $penelitian = new Penelitian();
@@ -37,6 +42,15 @@ class PenelitianController extends Controller
         $penelitian->tanggal_penelitian = $request->tanggal_penelitian;
         $penelitian->keterangan = $request->keterangan;
         $penelitian->save();
+
+        if ($request->hasFile('cover')) {
+            $cover = $request->file('cover');
+            $coverName = time() . '.' . $cover->getClientOriginalExtension();
+            $path = $cover->storeAs('assets/cover-penelitian', $coverName, 'public');
+            $penelitian->cover = $path;
+            $penelitian->save();
+        }
+
 
         return redirect()->route('penelitian')->with('status', 'Data berhasil disimpan');
     }

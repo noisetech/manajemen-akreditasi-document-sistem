@@ -63,7 +63,10 @@
 
                 <div class="form-group">
                     <label for="nama">Kategori:</label>
-                    <input type="text" name="kategori" class="form-control">
+                    <input type="text" name="kategori" class="form-control @error('kategori') is-invalid @enderror">
+                    @error('kategori')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <button class="btn btn-sm btn-primary" type="submit">

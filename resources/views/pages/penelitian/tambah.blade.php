@@ -40,18 +40,38 @@
     <div class="card shadow">
 
         <div class="card-body">
-            <form action="{{ route('penelitian.simpan') }}" method="post">
+            <form action="{{ route('penelitian.simpan') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
 
                 <div class="form-group">
+                    <label for="">Cover:</label>
+                    <input type="file" class="form-control @error('cover') is-invalid @enderror" name="cover">
+                    @error('content_misi')
+                    <div class="invalid-feedback" style="display: block">
+                        {{ $message }}
+                    </div>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="">Judul:</label>
-                    <input type="text" name="judul" class="form-control" placeholder="Masukan judul">
+                    <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror" placeholder=" Masukan judul">
+                    @error('judul')
+                    <div class="invalid-feedback" style="display: block">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="">Tanggal Penelitian:</label>
-                    <input type="date" name="tanggal_penelitian" class="form-control">
+                    <input type="date" name="tanggal_penelitian" class="form-control @error('tanggal_penelitian') is-invalid @enderror">
+                    @error('tanggal_penelitian')
+                    <div class="invalid-feedback" style="display: block">
+                        {{ $message }}
+                    </div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
@@ -61,7 +81,6 @@
 
                 <div class="form-group">
                     <label for="">Keterangan:</label>
-
                     <textarea class="form-control content-visi @error('content_misi') is-invalid @enderror" name="keterangan" placeholder="Masukkan Misi" rows="10">{!! old('content_misi') !!}</textarea>
                     @error('content_misi')
                     <div class="invalid-feedback" style="display: block">

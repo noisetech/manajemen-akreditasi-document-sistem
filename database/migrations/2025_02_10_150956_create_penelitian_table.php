@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('penelitian', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->date('tanggal_penelitian');
             $table->text('penulis');
             $table->longText('keterangan');
             $table->softDeletes();

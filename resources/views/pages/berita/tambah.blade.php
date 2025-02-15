@@ -1,8 +1,6 @@
 @extends('layouts.be')
 
 @section('title', 'Berita')
-
-
 @section('content')
 
 
@@ -56,34 +54,20 @@
     <div class="card shadow">
 
         <div class="card-body">
-            <form action="{{ route('berita.simpan') }}" method="post">
+            <form action="{{ route('berita.simpan') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Kategori Bertia:</label>
-                            <select name="kategori" class="form-control @error('kategori') is-invalid @enderror" id="">
-                                <option value="">--Pilih--</option>
-                                @foreach ($kategori_berita as $k )
-                                <option value="{{ $k->id }}" {{  $k->kategori }}></option>
-                                @endforeach
-                            </select>
-                            @error('kategori')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Tangal Post:</label>
-                            <input type="date" name="judul" class="form-control @error('tanggal_post') is-invalid @enderror">
-                            @error('tanggal_post')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label for="">Kategori Berita:</label>
+                    <select name="kategori" class="form-control @error('kategori') is-invalid @enderror" id="">
+                        <option value="">--Pilih--</option>
+                        @foreach ($kategori_berita as $k )
+                        <option value="{{ $k->id }}"> {{ $k->kategori }}</option>
+                        @endforeach
+                    </select>
+                    @error('kategori')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
                 </div>
 
 
@@ -91,6 +75,15 @@
                     <label for="">Judul:</label>
                     <input type="text" name="judul" class="form-control @error('judul') is-invalid @enderror">
                     @error('judul')
+                    <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+
+                <div class="form-group">
+                    <label for="">Thumbnail:</label>
+                    <input type="file" class="form-control  @error('thumbnail') is-invalid @enderror" name="thumbnail">
+                    @error('thumbnail')
                     <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>

@@ -21,6 +21,8 @@ class KategoriBeritaController extends Controller
     {
         $this->validate($request, [
             'kategori' => 'required'
+        ], [
+            'kategori.required' => 'tidak boleh kosong'
         ]);
 
         $kategori_berita = new KategoriBerita();
@@ -48,9 +50,11 @@ class KategoriBeritaController extends Controller
     {
         $this->validate($request, [
             'kategori' => 'required'
+        ], [
+            'kategori.required' => 'tidak boleh kosong'
         ]);
 
-        $kategori_berita = new KategoriBerita();
+        $kategori_berita = KategoriBerita::find($request->id);
         $kategori_berita->kategori = $request->kategori;
         $kategori_berita->slug = Str::slug($request->kategori);
         $kategori_berita->save();
@@ -63,6 +67,6 @@ class KategoriBeritaController extends Controller
         $kategori_berita = KategoriBerita::find($id);
         $kategori_berita->delete();
 
-        return redirect()->back('status', 'Data Berhasil Dihapus');
+        return redirect()->back()->with('status', 'Data Berhasil Dihapus');
     }
 }
